@@ -4,6 +4,7 @@ import Trend from '@/components/trend'
 import TransactionItem from '@/components/transaction-item'
 import Separator from '@/components/seperator'
 import TransactionSummaryItem from '@/components/transaction-summary-item'
+import Skeleton from '@/components/skeleton'
 
 export default function index() {
   return (
@@ -46,6 +47,23 @@ export default function index() {
       </div>
         </div>
     </div>
+    <div>
+        <h2 className="mb-4 text-lg font-mono">Loading Skeleton</h2>
+        <Separator />
+        <div className="space-y-8">
+          <div className="flex space-x-4">
+            <Skeleton className={''} />
+            <Skeleton className={''} />
+            <Skeleton className={''} />
+          </div>
+
+          <div className="space-y-4">
+            <Skeleton className={''} />
+            <Skeleton className={''} />
+            <Skeleton className={''} />
+          </div>
+        </div>
+      </div>
     </main>
   )
 }

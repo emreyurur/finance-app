@@ -1,33 +1,34 @@
-import { JSX, ClassAttributes, ButtonHTMLAttributes } from "react"
+import React from 'react';
 
-type ButtonProps = JSX.IntrinsicAttributes & ClassAttributes<HTMLButtonElement> & ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: 'default' | 'outline' | 'ghost';
-  size?: 'xs' | 'sm' | 'base' | 'lg';
+type Variant = 'default' | 'outline' | 'ghost';
+type Size = 'xs' | 'sm' | 'base' | 'lg';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant;
+  size?: Size;
+}
+
+const variants: Record<Variant, string> = {
+  default: 'bg-black text-white dark:bg-white dark:text-black rounded-md hover:bg-gray-700 dark:hover:bg-gray-200',
+  outline: 'border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500',
+  ghost: 'rounded-md bg-white dark:bg-black hover:bg-gray-200 dark:hover:bg-gray-500',
 };
 
-export default function Button(props: ButtonProps) {
-  const variants = {
-    default: 'bg-black text-white dark:bg-white dark:text-black rounded-md hover:bg-gray-700 dark:hover:bg-gray-200',
-    outline: 'border border-gray-300 dark:border-gray-500 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500',
-    ghost: 'rounded-md bg-white dark:bg-black hover:bg-gray-200 dark:hover:bg-gray-500'
-  }
-  const sizes = {
-    xs: 'text-xs px-2 py-1',
-    sm: 'text-sm px-3 py-1.5',
-    base: 'text-base px-4 py-2',
-    lg: 'text-lg px-4 py-2'
-  }
+const sizes: Record<Size, string> = {
+  xs: 'text-xs px-2 py-1',
+  sm: 'text-sm px-3 py-1.5',
+  base: 'text-base px-4 py-2',
+  lg: 'text-lg px-4 py-2',
+};
+
+export default function Button({ variant = 'default', size = 'base', className = '', ...props }: ButtonProps) {
+  const variantClass = variants[variant];
+  const sizeClass = sizes[size];
 
   return (
     <button
       {...props}
-      className={
-        `${props.variant ? variants[props.variant] : variants['default']} ` +
-        `${props.size ? sizes[props.size] : sizes['base']} ` +
-        (props.className || '')
-      }
-    >
-      {props.children}
-    </button>
-  )
+      className={`${variantClass} ${sizeClass} ${className}`}
+    />
+  );
 }

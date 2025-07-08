@@ -40,8 +40,10 @@ export default function TransactionList() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await fetch("http://localhost:3001/transactions", {
-          cache: "no-store",
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
+          next: {
+            tags: ['transaction-list'],
+          },
         });
         const rawTransactions = await res.json();
 

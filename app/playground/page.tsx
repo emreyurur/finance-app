@@ -6,6 +6,11 @@ import Separator from '@/components/seperator'
 import TransactionSummaryItem from '@/components/transaction-summary-item'
 import Skeleton from '@/components/skeleton'
 
+export const metadata = {
+  title: 'Playground',
+  description: 'Playground',
+}
+
 export default function index() {
   return (
     <main className="space-y-8">

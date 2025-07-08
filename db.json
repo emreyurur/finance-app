@@ -1,114 +1,314 @@
 {
-    "transactions": [
-      {
-        "id": 1,
-        "amount": 100,
-        "type": "Expense",
-        "description": "Restaurant",
-        "category": "Food",
-        "created_at": "2023-03-15T23:00:00"
-      },
-      {
-        "id": 2,
-        "amount": 159,
-        "type": "Expense",
-        "description": "Gas",
-        "category": "Car",
-        "created_at": "2023-03-15T23:00:00"
-      },
-      {
-        "id": 3,
-        "amount": 500,
-        "type": "Income",
-        "description": "Salary",
-        "category": "",
-        "created_at": "2023-03-15T23:00:00"
-      },
-      {
-        "id": 4,
-        "amount": 99,
-        "type": "Expense",
-        "description": "Rent",
-        "category": "Housing",
-        "created_at": "2024-05-10T23:00:00"
-      },
-      {
-        "type": "Expense",
-        "category": "Health",
-        "amount": 900,
-        "description": "Paying for stuff...",
-        "created_at": "2024-01-23T00:00:00",
-        "id": 5
-      },
-      {
-        "type": "Investment",
-        "category": "Education",
-        "amount": 10000,
-        "description": "For the future",
-        "created_at": "2023-11-17T00:00:00",
-        "id": 6
-      },
-      {
-        "type": "Income",
-        "category": "Housing",
-        "amount": 6771,
-        "description": "Paying for stuff...",
-        "created_at": "2023-11-17T00:00:00",
-        "id": 7
-      },
-      {
-        "type": "Income",
-        "category": "Housing",
-        "amount": 343,
-        "description": "Paying for stuff...",
-        "created_at": "2024-01-23T00:00:00",
-        "id": 8
-      },
-      {
-        "type": "Saving",
-        "category": "Housing",
-        "amount": 500,
-        "description": "Salary",
-        "created_at": "2023-11-17T00:00:00",
-        "id": 9
-      },
-      {
-        "type": "Income",
-        "category": "Housing",
-        "amount": 1,
-        "description": "Salary",
-        "created_at": "2024-01-23T00:00:00",
-        "id": 10
-      },
-      {
-        "type": "Income",
-        "category": "Housing",
-        "amount": 1,
-        "description": "Salary",
-        "created_at": "2024-01-23T00:00:00",
-        "id": 11
-      }
-    ],
-    "trends": [
-      {
-        "id": "Income",
-        "amount": 4000,
-        "prevAmount": 3000
-      },
-      {
-        "id": "Expense",
-        "amount": 4000,
-        "prevAmount": 3000
-      },
-      {
-        "id": "Saving",
-        "amount": 4000,
-        "prevAmount": 3000
-      },
-      {
-        "id": "Investment",
-        "amount": 4000,
-        "prevAmount": 3000
-      }
-    ]
-  }
+  "transactions": [
+    {
+      "id": "1",
+      "amount": 100,
+      "type": "Expense",
+      "description": "Restaurant",
+      "category": "Food",
+      "created_at": "2023-03-15T23:00:00"
+    },
+    {
+      "id": "2",
+      "amount": 159,
+      "type": "Expense",
+      "description": "Gas",
+      "category": "Car",
+      "created_at": "2023-03-15T23:00:00"
+    },
+    {
+      "id": "3",
+      "amount": 500,
+      "type": "Income",
+      "description": "Salary",
+      "category": "",
+      "created_at": "2023-03-15T23:00:00"
+    },
+    {
+      "id": "4",
+      "amount": 99,
+      "type": "Expense",
+      "description": "Rent",
+      "category": "Housing",
+      "created_at": "2024-05-10T23:00:00"
+    },
+    {
+      "type": "Expense",
+      "category": "Health",
+      "amount": 900,
+      "description": "Paying for stuff...",
+      "created_at": "2024-01-23T00:00:00",
+      "id": "5"
+    },
+    {
+      "type": "Investment",
+      "category": "Education",
+      "amount": 10000,
+      "description": "For the future",
+      "created_at": "2023-11-17T00:00:00",
+      "id": "6"
+    },
+    {
+      "type": "Income",
+      "category": "Housing",
+      "amount": 6771,
+      "description": "Paying for stuff...",
+      "created_at": "2023-11-17T00:00:00",
+      "id": "7"
+    },
+    {
+      "type": "Income",
+      "category": "Housing",
+      "amount": 343,
+      "description": "Paying for stuff...",
+      "created_at": "2024-01-23T00:00:00",
+      "id": "8"
+    },
+    {
+      "type": "Saving",
+      "category": "Housing",
+      "amount": 500,
+      "description": "Salary",
+      "created_at": "2023-11-17T00:00:00",
+      "id": "9"
+    },
+    {
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "Salary",
+      "created_at": "2024-01-23T00:00:00",
+      "id": "10"
+    },
+    {
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "Salary",
+      "created_at": "2024-01-23T00:00:00",
+      "id": "11"
+    },
+    {
+      "id": "893c",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "fc82",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "268e",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "b2ee",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "71bb",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "85c6",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "4cf1",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "4f7f",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "a231",
+      "type": "Expense",
+      "category": "Health",
+      "amount": 20,
+      "description": "zcxzcxzczx",
+      "created_at": "2025-01-25T00:00:00"
+    },
+    {
+      "id": "88e2",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 2,
+      "description": "stuf",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "cfc8",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 2,
+      "description": "stuf",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "16f4",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 2,
+      "description": "stuf",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "a0c0",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 2,
+      "description": "stuf",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "2a99",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 2,
+      "description": "stuf",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "758f",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 2,
+      "description": "stuf",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "db1f",
+      "type": "Expense",
+      "category": "Transport",
+      "amount": 2,
+      "description": "sadasdasdas",
+      "created_at": "2025-08-02T00:00:00"
+    },
+    {
+      "id": "6911",
+      "type": "Expense",
+      "category": "Transport",
+      "amount": 2,
+      "description": "sadasdasdas",
+      "created_at": "2025-08-02T00:00:00"
+    },
+    {
+      "id": "ece2",
+      "type": "Expense",
+      "category": "Transport",
+      "amount": 2,
+      "description": "sadasdasdas",
+      "created_at": "2025-08-02T00:00:00"
+    },
+    {
+      "id": "779f",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "ewqewqeq",
+      "created_at": "2025-05-05T00:00:00"
+    },
+    {
+      "id": "d595",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "ewqewqeq",
+      "created_at": "2025-05-05T00:00:00"
+    },
+    {
+      "id": "5962",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "ewqewqeq",
+      "created_at": "2025-05-05T00:00:00"
+    },
+    {
+      "id": "86e0",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "ewqewqeq",
+      "created_at": "2025-05-05T00:00:00"
+    },
+    {
+      "id": "ba44",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "ewqewqeq",
+      "created_at": "2025-05-05T00:00:00"
+    },
+    {
+      "id": "853b",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "ewqewqeq",
+      "created_at": "2025-05-05T00:00:00"
+    },
+    {
+      "id": "1835",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 1,
+      "description": "ewqewqeq",
+      "created_at": "2025-05-05T00:00:00"
+    }
+  ],
+  "trends": [
+    {
+      "id": "Income",
+      "amount": 4000,
+      "prevAmount": 3000
+    },
+    {
+      "id": "Expense",
+      "amount": 4000,
+      "prevAmount": 3000
+    },
+    {
+      "id": "Saving",
+      "amount": 4000,
+      "prevAmount": 3000
+    },
+    {
+      "id": "Investment",
+      "amount": 4000,
+      "prevAmount": 3000
+    }
+  ]
+}

@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import TransactionItem from "@/components/transaction-item";
 import Skeleton from "@/components/skeleton";
+import { supabase } from "@/lib/supabase-browser";
+
 
 export interface Transaction {
   id: number;
@@ -10,7 +12,7 @@ export interface Transaction {
   category?: string;
   description: string;
   amount: number;
-  createdAt?: string;
+  created_at?: string;
 }
 
 const groupAndSortTransactionsByDate = (
@@ -19,8 +21,8 @@ const groupAndSortTransactionsByDate = (
   const grouped: Record<string, { transactions: Transaction[]; amount: number }> = {};
 
   for (const transaction of transactions) {
-    if (!transaction.createdAt) continue;
-    const date = transaction.createdAt.split("T")[0];
+    if (!transaction.created_at) continue;
+    const date = transaction.created_at.split("T")[0];
     if (!grouped[date]) {
       grouped[date] = { transactions: [], amount: 0 };
     }
@@ -40,21 +42,24 @@ export default function TransactionList() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/transactions`, {
-          next: {
-            tags: ['transaction-list'],
-          },
-        });
-        const rawTransactions = await res.json();
+        const { data, error } = await supabase
+          .from('transactions')
+          .select('*')
+          .order('created_at', { ascending: true });
 
-        const formatted = rawTransactions.map((item: any) => ({
+        if (error) {
+          console.error("Supabase error:", error);
+          return;
+        }
+
+        const formatted = data?.map((item: any) => ({
           id: item.id,
           type: item.type,
           category: item.category || undefined,
           description: item.description,
           amount: item.amount,
-          createdAt: item.created_at,
-        }));
+          created_at: item.created_at,
+        })) || [];
 
         setTransactions(formatted);
       } catch (error) {

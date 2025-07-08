@@ -1,30 +1,33 @@
-import React from 'react';
-import Trend from '@/components/trend';
+export const dynamic = "force-dynamic";
 
-export default async function TrendServer({ type }: { type: string }) {
-  if (
-    typeof type !== 'string' ||
-    !['Income', 'Expense', 'Investment', 'Saving'].includes(type)
-  ) {
-    throw new Error('Invalid type');
+import BaseTrend from "@/components/trend";
+import { createClient } from "@/lib/server";
+
+type TrendProps = {
+  type: "Income" | "Expense" | "Investment" | "Saving";
+  range: string;
+};
+
+export default async function Trend({ type, range }: TrendProps) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .rpc("calculate_total", {
+      type_arg: type,
+      range_arg: range,
+    });
+
+  if (error) {
+    console.error("RPC Error:", error);
+    throw new Error("Could not fetch the trend data");
   }
 
-  const response = await fetch(`${process.env.API_URL}/trends/${type}`, {
-    cache: 'no-store',
-  });
-
-  if (!response.ok) {
-    // Eğer API 404 veya başka hata dönerse, hata fırlat
-    throw new Error(`Failed to fetch trend: ${response.status} ${response.statusText}`);
-  }
-
-  const data = await response.json();
-
-  const { amount, prevAmount } = data;
+  const amount = data?.[0]?.current_amount ?? 0;
+  const prevAmount = data?.[0]?.previous_amount ?? 0;
 
   return (
-    <Trend
-      type={type as 'Income' | 'Expense' | 'Investment' | 'Saving'}
+    <BaseTrend
+      type={type}
       amount={amount}
       prevAmount={prevAmount}
     />

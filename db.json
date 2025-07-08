@@ -287,6 +287,38 @@
       "amount": 1,
       "description": "ewqewqeq",
       "created_at": "2025-05-05T00:00:00"
+    },
+    {
+      "id": "5507",
+      "type": "Expense",
+      "category": "Transport",
+      "amount": 200,
+      "description": "rererere",
+      "created_at": "2025-07-07T00:00:00"
+    },
+    {
+      "id": "2cf2",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 100,
+      "description": "erererere",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "8148",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 100,
+      "description": "rerererere",
+      "created_at": "2025-07-05T00:00:00"
+    },
+    {
+      "id": "753d",
+      "type": "Income",
+      "category": "Housing",
+      "amount": 500,
+      "description": "web3 pay",
+      "created_at": "2025-07-05T00:00:00"
     }
   ],
   "trends": [

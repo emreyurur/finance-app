@@ -14,6 +14,9 @@
     "@emotion/styled": "^11.14.1",
     "@hookform/resolvers": "^5.1.1",
     "@mui/material": "^7.2.0",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.50.3",
     "json-server": "^1.0.0-beta.3",
     "lucide-react": "^0.525.0",
     "next": "15.3.4",
@@ -21,11 +24,13 @@
     "react": "^19.0.0",
     "react-cookie": "^8.0.1",
     "react-dom": "^19.0.0",
+    "react-error-boundary": "^6.0.0",
     "react-hook-form": "^7.60.0",
     "zod": "^3.25.75"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@faker-js/faker": "^9.9.0",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",

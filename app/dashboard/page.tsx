@@ -1,3 +1,4 @@
+// Page.tsx
 import React, { Suspense } from "react";
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
@@ -9,6 +10,7 @@ import TransactionListFallback from "./components/transaction-list-fallback";
 import { ErrorBoundary } from "react-error-boundary";
 import { types } from "@/lib/consts";
 import Range from "./components/range";
+import TransactionListWrapper from "./components/transaction-list-wrapper";
 
 interface PageProps {
   searchParams: {
@@ -17,6 +19,7 @@ interface PageProps {
 }
 
 export default async function Page({ searchParams }: PageProps) {
+  // searchParams'ı async olarak çöz
   const range = searchParams?.range ?? "last30days";
 
   return (
@@ -57,7 +60,7 @@ export default async function Page({ searchParams }: PageProps) {
       </section>
 
       <Suspense fallback={<TransactionListFallback />}>
-        <TransactionList />
+        <TransactionListWrapper range={range} />
       </Suspense>
     </>
   );

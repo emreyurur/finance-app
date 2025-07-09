@@ -7,5 +7,9 @@ interface TransactionListWrapperProps {
 
 export default async function TransactionListWrapper({ range }: TransactionListWrapperProps) {
   const transactions = await fetchTransactions(range);
-  return <TransactionList initialTransactions={transactions} key={range} range={range} />;
+  const formattedTransactions = transactions.map(transaction => ({
+    ...transaction,
+    category: transaction.category || undefined,
+  }));
+  return <TransactionList initialTransactions={formattedTransactions} key={range} range={range} />;
 }

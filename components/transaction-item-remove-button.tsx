@@ -1,19 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { deleteTransaction } from "@/lib/actions";
+import Button from "./button";
 import { X, Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
 
-interface TransactionItemRemoveButtonProps {
+type TransactionItemRemoveButtonProps = {
   id: string;
-}
+  onRemoved: () => void;
+};
 
 export default function TransactionItemRemoveButton({
   id,
+  onRemoved,
 }: TransactionItemRemoveButtonProps) {
-  const [loading, setLoading] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
-  const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [confirmed, setConfirmed] = useState<boolean>(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleClick = async () => {
     if (!confirmed) {
@@ -23,36 +26,41 @@ export default function TransactionItemRemoveButton({
 
     try {
       setLoading(true);
-
-      // Gerçek DELETE isteği
-      await fetch(`http://localhost:3001/transactions/${id}`, {
-        method: "DELETE",
-      });
-
-      // Server Components yeniden render edilir
-      router.refresh();
+      await deleteTransaction(id);
+      onRemoved();
     } finally {
       setLoading(false);
     }
   };
 
+  // Sayfada boş bir yere tıklanırsa onayı sıfırla
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        confirmed &&
+        buttonRef.current &&
+        !buttonRef.current.contains(e.target as Node)
+      ) {
+        setConfirmed(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [confirmed]);
+
   return (
-    <button
-      type="button"
-      className={`px-2 py-1 rounded text-xs flex items-center justify-center transition
-        ${
-          !confirmed
-            ? "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
-            : "bg-red-500 text-white hover:bg-red-600"
-        }
-        ${loading ? "opacity-60 cursor-not-allowed" : ""}
-      `}
+    <Button
+      ref={buttonRef}
+      size="xs"
+      variant={!confirmed ? "ghost" : "danger"}
       onClick={handleClick}
-      disabled={loading}
       aria-disabled={loading}
     >
       {!loading && <X className="w-4 h-4" />}
       {loading && <Loader className="w-4 h-4 animate-spin" />}
-    </button>
+    </Button>
   );
 }

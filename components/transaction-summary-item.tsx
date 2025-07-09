@@ -16,3 +16,4 @@ export default function TransactionSummaryItem({ date, amount }: TransactionSumm
     <div className="min-w-[100px]"></div>
   </div>)
 }
+

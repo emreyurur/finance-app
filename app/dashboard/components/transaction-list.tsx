@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Button from "@/components/button";
 import Separator from "@/components/seperator";
@@ -6,35 +6,60 @@ import TransactionItem from "@/components/transaction-item";
 import TransactionSummaryItem from "@/components/transaction-summary-item";
 import { fetchTransactions } from "@/lib/actions";
 import { groupAndSumTransactionsByDate } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Loader } from "lucide-react";
 
-interface Transaction {
+export type Transaction = {
   id: string;
   created_at: string;
-  amount: number;
   type: "Income" | "Expense" | "Saving" | "Investment";
+  category?: string;
   description: string;
-  category?: string | null;
-}
+  amount: number;
+};
 
-interface TransactionListProps {
+export type TransactionListProps = {
   range: string;
   initialTransactions: Transaction[];
-}
+};
 
-export default function TransactionList({ range, initialTransactions }: TransactionListProps) {
-  const [transactions, setTransactions] = useState<Transaction[]>(initialTransactions);
-  const [offset, setOffset] = useState<number>(initialTransactions.length);
+export default function TransactionList({
+  range,
+  initialTransactions,
+}: TransactionListProps) {
+  const [transactions, setTransactions] = useState<Transaction[]>(
+    initialTransactions
+  );
+  const [buttonHidden, setButtonHidden] = useState<boolean>(
+    initialTransactions.length === 0
+  );
+  const [loading, setLoading] = useState<boolean>(false);
 
   const grouped = groupAndSumTransactionsByDate(transactions);
 
-  const handleClick = async () => {
-    const nextTransactions = await fetchTransactions(range, offset, 10);
-    setOffset(prevValue => prevValue + 10);
-    setTransactions(prevTransactions => [
-      ...prevTransactions,
-      ...nextTransactions
-    ]);
+  const handleClick = async (): Promise<void> => {
+    setLoading(true);
+    try {
+      const nextTransactions = await fetchTransactions(
+        range,
+        transactions.length,
+        10
+      );
+      setButtonHidden(nextTransactions.length === 0);
+      setTransactions((prevTransactions) => [
+        ...prevTransactions,
+        ...nextTransactions.map(transaction => ({
+          ...transaction,
+          category: transaction.category ?? undefined,
+        })),
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemoved = (id: string) => (): void => {
+    setTransactions((prev) => prev.filter((t) => t.id !== id));
   };
 
   return (
@@ -44,19 +69,31 @@ export default function TransactionList({ range, initialTransactions }: Transact
           <TransactionSummaryItem date={date} amount={amount} />
           <Separator />
           <section className="space-y-4">
-            {transactions.map(transaction => (
+            {transactions.map((transaction) => (
               <div key={transaction.id}>
-                <TransactionItem description={""} onRemoved={function (): void {
-                  throw new Error("Function not implemented.");
-                } } {...transaction} />
+                <TransactionItem
+                description={""} {...transaction}
+                onRemoved={handleRemoved(transaction.id)}                />
               </div>
             ))}
           </section>
         </div>
       ))}
-      <div className="flex justify-center">
-        <Button variant="ghost" onClick={handleClick}>Load More</Button>
-      </div>
+      {transactions.length === 0 && (
+        <div className="text-center text-gray-400 dark:text-gray-500">
+          No transactions found
+        </div>
+      )}
+      {!buttonHidden && (
+        <div className="flex justify-center">
+          <Button variant="ghost" onClick={handleClick} disabled={loading}>
+            <div className="flex items-center space-x-1">
+              {loading && <Loader className="animate-spin" />}
+              <div>Load More</div>
+            </div>
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
